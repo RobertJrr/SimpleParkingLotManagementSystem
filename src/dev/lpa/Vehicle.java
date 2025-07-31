@@ -13,4 +13,9 @@ public class Vehicle {
         this.color = color;
     }
 
+    @Override
+    public String toString(){
+        return String.format("Type: %-20sRegistration: %-20sColor: %-20s",type,registration,color);
+    }
+
 }
