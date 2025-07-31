@@ -14,6 +14,7 @@ public class Slot {
         this.ticketId = null;
     }
 
+
     public void setVehicle(Vehicle vehicle){
         this.vehicle = vehicle;
     }

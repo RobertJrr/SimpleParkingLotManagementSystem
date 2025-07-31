@@ -1,5 +1,6 @@
 package dev.lpa;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 
 public class ParkingLot {
@@ -56,11 +57,47 @@ public class ParkingLot {
     }
 
     private String generateTicketId(int floorNumber, int spaceNumber){
-        return  parkingLotId + ": " + floorNumber + "_" + spaceNumber;
+        return  parkingLotId + "-" + floorNumber + "-" + spaceNumber;
     }
 
+    public void unpark(String ticketId) {
+        int floorNumber = 0;
+        int spaceNumber = 0;
+
+        try{
+            String[] parkInfoArray = ticketId.split("-");
+            if(parkInfoArray.length != 3){
+                throw new IllegalArgumentException("Invalid ticket ID");
+            }
+             floorNumber = Integer.parseInt(parkInfoArray[1]) - 1;
+             spaceNumber = Integer.parseInt(parkInfoArray[2]) - 1;
+
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        //parse for ticket floor number and space number
+        for (int i = 0; i < slots.size(); i++) {
+            for (int j = 0; j < slots.get(i).size(); j++) {
+                //get matching floor and space
+                if(i == floorNumber && j == spaceNumber){
+                    Slot slot = slots.get(i).get(j);
+                    slot.setVehicle(null);
+                    slot.setTicketId(null);
+                    System.out.println("Vehicle removed, slot now open");
+                    return;
+                }
+
+            }
+        }
+        System.out.println("Ticket id not found");
+    }
+
+    public int totalOpenSlotsPerVehicle(String type){
+        int count = 0;
 
 
-
+    }
 
 }
