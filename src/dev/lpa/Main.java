@@ -12,20 +12,25 @@ public class Main {
         int nSlotsPerFloor  = 6;
 //        24 total slots
         ParkingLot parkingLot = new ParkingLot("Mickey",nFloors,nSlotsPerFloor);
-        int slotsOpen = parkingLot.totalOpenSlots("car");
-        System.out.println("Slots currently open: " + slotsOpen); //12 because first 3 slots on each floor are truck,bike,bike
-
 
         String ticket1 = parkingLot.parkVehicle("car","MH-03","red");
         String ticket2 = parkingLot.parkVehicle("car","MH-04","purple");
-        String ticket3 = parkingLot.parkVehicle("car","MH-05","blue");
-
         parkingLot.displayedOccupiedSlots("car");
 
         //unparking second vehicle
         parkingLot.unpark(ticket2);
-
         parkingLot.displayedOccupiedSlots("car");
+
+        //parking truck
+        parkingLot.displayOpenSlots("truck");
+        parkingLot.parkVehicle("truck","MH-01","black");
+        parkingLot.displayedOccupiedSlots("truck");
+        //Parking three more trucks and checking if space is available
+        for(int i = 5; i <= 7; i++){
+            parkingLot.parkVehicle("truck", "MH-0" + i, "silver");
+        }
+        parkingLot.displayedOccupiedSlots("truck");
+        parkingLot.displayOpenSlots("truck");
 
 
 

@@ -97,11 +97,11 @@ public class ParkingLot {
         return type.equals("truck") || type.equals("car") || type.equals("bike");
     }
 
-    public int totalOpenSlots(String type) {
+    public void displayOpenSlots(String type) {
         //check if type passed is allowed in lot
         //if not return 0
         if(!(isAllowed(type))){
-            return 0;
+            return;
         }
 
         int count = 0;
@@ -113,7 +113,8 @@ public class ParkingLot {
                 }
             }
         }
-        return count;
+        System.out.println("------------Displaying Number of open slots for " + type + "------------");
+        System.out.println(count);
     }
 
     public void displayedOccupiedSlots(String type){
