@@ -88,16 +88,48 @@ public class ParkingLot {
                     System.out.println("Vehicle removed, slot now open");
                     return;
                 }
-
             }
         }
         System.out.println("Ticket id not found");
     }
 
-    public int totalOpenSlotsPerVehicle(String type){
-        int count = 0;
-
-
+    private boolean isAllowed(String type){
+        return type.equals("truck") || type.equals("car") || type.equals("bike");
     }
+
+    public int totalOpenSlots(String type) {
+        //check if type passed is allowed in lot
+        //if not return 0
+        if(!(isAllowed(type))){
+            return 0;
+        }
+
+        int count = 0;
+        for (List<Slot> floor : slots) {
+            for (Slot slot : floor) {
+                //if slot type equals type passed and no vehicle is parked there
+                if (slot.getType().equals(type) && slot.getVehicle() == null) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public void displayedOccupiedSlots(String type){
+        if(!(isAllowed(type))){
+            return;
+        }
+        System.out.println("------------Displaying occupied slots for " + type + "------------");
+        for(int i = 0; i < slots.size(); i++){
+            for(int j = 0; j < slots.get(i).size(); j++ ){
+                Slot slot = slots.get(i).get(j);
+                if(slot.getVehicle() != null && slot.getType().equals(type)){
+                    System.out.println("Floor " + (i +1) + " slot " + (j+1));
+                }
+            }
+        }
+    }
+
 
 }

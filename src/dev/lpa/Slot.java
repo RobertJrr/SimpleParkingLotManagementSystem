@@ -34,4 +34,5 @@ public class Slot {
     public Vehicle getVehicle(){
         return vehicle;
     }
+
 }
